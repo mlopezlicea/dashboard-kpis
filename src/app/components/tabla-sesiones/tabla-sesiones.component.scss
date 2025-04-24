@@ -1,0 +1,40 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  
+    thead {
+      background-color: #2E2B3F;
+  
+      th {
+        color: #FFFFFF;
+        font-weight: 500;
+        font-size: 14px;
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid #3D3A50;
+        cursor: pointer;
+  
+        &:hover {
+          color: #00FF88;
+        }
+      }
+    }
+  
+    tbody {
+      tr {
+        transition: background 0.2s;
+  
+        &:hover {
+          background-color: #272530;
+        }
+  
+        td {
+          padding: 10px;
+          font-size: 13px;
+          color: #CCC;
+          border-bottom: 1px solid #2D2D2D;
+        }
+      }
+    }
+  }
+  

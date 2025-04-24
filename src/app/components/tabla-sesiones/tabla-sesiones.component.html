@@ -1,0 +1,17 @@
+<table class="table minimal-table">
+    <thead>
+      <tr>
+        <th (click)="ordenarPor('ip')">IP {{ obtenerIconoOrden('ip') }}</th>
+        <th (click)="ordenarPor('componente')">Componente {{ obtenerIconoOrden('componente') }}</th>
+        <th (click)="ordenarPor('sesiones')">Sesiones {{ obtenerIconoOrden('sesiones') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of sesiones">
+        <td>{{ row.ip }}</td>
+        <td>{{ row.componente }}</td>
+        <td>{{ row.sesiones }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

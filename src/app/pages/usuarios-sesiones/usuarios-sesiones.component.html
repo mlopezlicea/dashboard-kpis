@@ -1,0 +1,69 @@
+<div class="dashboard-doble-columna">
+    <!-- TÍTULOS: TULTITLÁN y QUERÉTARO -->
+    <div class="zona-column">
+      <div class="zona-titulo">TULTITLÁN</div>
+      <div class="zona-panel">
+        <div class="zona-kpis">
+          <div class="kpi-card">Total sesiones<br><strong>{{ zonas[0].total }}</strong></div>
+          <div class="kpi-card">IPs activas<br><strong>{{ zonas[0].datos.length }}</strong></div>
+        </div>
+        <div class="zona-grafica">
+          <canvas baseChart
+                  [data]="getChartDataFiltered(zonas[0].datos, zonas[0].ipSeleccionada)"
+                  [options]="chartOptions"
+                  chartType="line">
+          </canvas>
+        </div>
+        <div class="zona-tabla">
+          <table class="tabla-ip">
+            <thead>
+              <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of zonas[0].datos"
+                  (click)="zonas[0].selector(row.ip)"
+                  [class.selected]="zonas[0].ipSeleccionada === row.ip">
+                <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
+                <td>{{ row.componente }}</td>
+                <td>{{ row.historial[row.historial.length - 1] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <div class="zona-column">
+      <div class="zona-titulo">QUERÉTARO</div>
+      <div class="zona-panel">
+        <div class="zona-kpis">
+          <div class="kpi-card">Total sesiones<br><strong>{{ zonas[1].total }}</strong></div>
+          <div class="kpi-card">IPs activas<br><strong>{{ zonas[1].datos.length }}</strong></div>
+        </div>
+        <div class="zona-grafica">
+          <canvas baseChart
+                  [data]="getChartDataFiltered(zonas[1].datos, zonas[1].ipSeleccionada)"
+                  [options]="chartOptions"
+                  chartType="line">
+          </canvas>
+        </div>
+        <div class="zona-tabla">
+          <table class="tabla-ip">
+            <thead>
+              <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of zonas[1].datos"
+                  (click)="zonas[1].selector(row.ip)"
+                  [class.selected]="zonas[1].ipSeleccionada === row.ip">
+                <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
+                <td>{{ row.componente }}</td>
+                <td>{{ row.historial[row.historial.length - 1] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,116 @@
+.dashboard-doble-columna {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    padding: 24px;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  /* Contenedor de cada zona: TULTITLÁN y QUERÉTARO */
+  .zona-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1 1 48%;
+    min-width: 500px;
+  }
+  
+  .zona-titulo {
+    background-color: #0B0B0B;
+    color: #F0F0F0;
+    padding: 12px 20px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  /* PANEL horizontal dentro de cada zona */
+  .zona-panel {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  
+  /* KPIs */
+  .zona-kpis {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 0.6;
+    min-width: 160px;
+  }
+  
+  .kpi-card {
+    background-color: #0D0F5C;
+    color: #FFF;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  
+    strong {
+      font-size: 1.5rem;
+      display: block;
+      margin-top: 8px;
+    }
+  }
+  
+  /* Gráfica */
+  .zona-grafica {
+    flex: 2;
+    background-color: #1E1E2E;
+    padding: 16px;
+    border-radius: 10px;
+    min-width: 300px;
+  }
+  
+  /* Tabla */
+  .zona-tabla {
+    flex: 1.2;
+    min-width: 250px;
+    overflow-x: auto;
+  }
+  
+  .tabla-ip {
+    width: 100%;
+    border-collapse: collapse;
+  
+    thead th {
+      background-color: #1A1A1A;
+      color: #FFF;
+      padding: 10px;
+      font-size: 14px;
+      text-align: left;
+    }
+  
+    tbody td {
+      color: #CCC;
+      padding: 10px;
+      border-bottom: 1px solid #333;
+      font-size: 13px;
+    }
+  
+    .ip-chip {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  
+    tr.selected {
+      background-color: #1f2a3c;
+    }
+  
+    tr:hover {
+      background-color: #222;
+      cursor: pointer;
+    }
+  }
+  
