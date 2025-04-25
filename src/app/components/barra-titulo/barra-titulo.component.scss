@@ -1,0 +1,45 @@
+// Barra superior del título y botón de ayuda
+.barra-titulo {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background-color: #000;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+  }
+  
+  // Contenedor del título y el botón, alineados horizontalmente
+  .titulo-con-boton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+  }
+  
+  // Estilo del texto del título
+  .titulo {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  // Estilo del botón de ayuda
+  .boton-ayuda {
+    button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+  
+    button:hover {
+      color: #0af;
+    }
+  }
+  

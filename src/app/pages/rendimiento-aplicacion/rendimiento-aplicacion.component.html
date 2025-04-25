@@ -1,0 +1,57 @@
+<app-barra-titulo
+  [titulo]="'RENDIMIENTO'"
+  (clickAyuda)="abrirModalAyuda()">
+</app-barra-titulo>
+
+<app-modal-ayuda
+  [visible]="modalAbierto"
+  [titulo]="'¿Qué muestra este apartado?'"
+  [mensaje]="'Este panel presenta indicadores clave del rendimiento del sistema, como tiempos de respuesta, errores HTTP, caídas del WAS y consultas pesadas por zona. Es útil para detectar cuellos de botella o incidentes en la operación del SMC.'"
+  (cerrar)="cerrarModalAyuda()">
+</app-modal-ayuda>
+
+<div class="dashboard-doble-columna">
+  <!-- TULTITLÁN -->
+  <div class="zona-column">
+    <div class="zona-titulo">TULTITLÁN</div>
+    <div class="zona-panel">
+      <div class="zona-kpis">
+        <div class="kpi-card" *ngFor="let kpi of kpisTultitlan" [ngClass]="kpi.color">
+          {{ kpi.titulo }}<br>
+          <strong>{{ kpi.valor }} <span *ngIf="kpi.unidad">{{ kpi.unidad }}</span></strong>
+        </div>
+      </div>
+
+      <div class="zona-grafica">
+        <h3>Tiempo Promedio de Respuesta</h3>
+        <canvas baseChart
+          [data]="getChartData(rendimientoTultitlan, selectedTultitlan)"
+          [options]="chartOptions"
+          chartType="line">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUERÉTARO -->
+  <div class="zona-column">
+    <div class="zona-titulo">QUERÉTARO</div>
+    <div class="zona-panel">
+      <div class="zona-kpis">
+        <div class="kpi-card" *ngFor="let kpi of kpisQueretaro" [ngClass]="kpi.color">
+          {{ kpi.titulo }}<br>
+          <strong>{{ kpi.valor }} <span *ngIf="kpi.unidad">{{ kpi.unidad }}</span></strong>
+        </div>
+      </div>
+
+      <div class="zona-grafica">
+        <h3>Tiempo Promedio de Respuesta</h3>
+        <canvas baseChart
+          [data]="getChartData(rendimientoQueretaro, selectedQueretaro)"
+          [options]="chartOptions"
+          chartType="line">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

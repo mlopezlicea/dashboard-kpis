@@ -1,0 +1,12 @@
+<!-- Barra de título superior con botón de ayuda contextual -->
+<div class="barra-titulo">
+    <div class="titulo-con-boton">
+      <h2 class="titulo">{{ titulo }}</h2>
+      <app-boton-ayuda
+        class="boton-ayuda"
+        (clickAyuda)="emitirAyuda()"
+        [tooltip]="'¿Qué muestra este panel?'">
+      </app-boton-ayuda>
+    </div>
+  </div>
+  

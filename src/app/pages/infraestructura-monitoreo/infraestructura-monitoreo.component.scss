@@ -1,0 +1,99 @@
+.dashboard-doble-columna {
+    display: flex;
+    gap: 48px;
+    padding: 24px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .zona-column {
+    flex: 1 1 48%;
+    min-width: 500px;
+  }
+  
+  .zona-titulo {
+    background-color: #0B0B0B;
+    color: #F0F0F0;
+    padding: 12px 20px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  
+  .alerta-kpi {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .contador-ok {
+    background-color: #0b3d0b;
+    color: #8aff8a;
+  }
+  .contador-warning {
+    background-color: #4a3200;
+    color: #ffcc00;
+  }
+  .contador-critico {
+    background-color: #4d0000;
+    color: #ff6b6b;
+  }
+  
+  .tabla-ip {
+    width: 100%;
+    border-collapse: collapse;
+  
+    thead th {
+      background-color: #1A1A1A;
+      color: #fff !important;
+      padding: 10px;
+      font-size: 14px;
+      text-align: left;
+    }
+  
+    tbody td {
+      color: #CCC;
+      padding: 10px;
+      border-bottom: 1px solid #333;
+      font-size: 13px;
+    }
+  
+    tr:hover {
+      background-color: #222;
+    }
+  }
+  
+  /* Alarmas visuales por celda */
+  .estado-ok {
+    color: #4caf50;
+    font-weight: bold;
+  }
+  .estado-warning {
+    color: #ffc107;
+    font-weight: bold;
+  }
+  .estado-critico {
+    color: #f44336;
+    font-weight: bold;
+  }
+  
+  /* Animación para íconos de alerta */
+  @keyframes parpadeo {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  
+  .icono-alerta {
+    margin-left: 4px;
+    animation: parpadeo 1s infinite ease-in-out;
+    display: inline-block;
+    font-size: 1rem;
+  }
+  

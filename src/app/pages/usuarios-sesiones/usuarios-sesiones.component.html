@@ -1,69 +1,92 @@
+<app-barra-titulo
+  [titulo]="'SESIONES'"
+  (clickAyuda)="abrirModalAyuda()">
+</app-barra-titulo>
+
+<!-- Modal de ayuda (visible controlado por booleano) -->
+<app-modal-ayuda
+  [visible]="modalAbierto"
+  [titulo]="'¿Qué muestra este apartado?'"
+  [mensaje]="'Este panel muestra el total de sesiones activas, IPs conectadas, latencia promedio y pico reciente por zona. Puedes hacer clic en una IP para ver su comportamiento específico en la gráfica.'"
+  (cerrar)="cerrarModalAyuda()">
+</app-modal-ayuda>
+
+
+
 <div class="dashboard-doble-columna">
-    <!-- TÍTULOS: TULTITLÁN y QUERÉTARO -->
-    <div class="zona-column">
-      <div class="zona-titulo">TULTITLÁN</div>
-      <div class="zona-panel">
-        <div class="zona-kpis">
-          <div class="kpi-card">Total sesiones<br><strong>{{ zonas[0].total }}</strong></div>
-          <div class="kpi-card">IPs activas<br><strong>{{ zonas[0].datos.length }}</strong></div>
-        </div>
-        <div class="zona-grafica">
-          <canvas baseChart
-                  [data]="getChartDataFiltered(zonas[0].datos, zonas[0].ipSeleccionada)"
-                  [options]="chartOptions"
-                  chartType="line">
-          </canvas>
-        </div>
-        <div class="zona-tabla">
-          <table class="tabla-ip">
-            <thead>
-              <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of zonas[0].datos"
-                  (click)="zonas[0].selector(row.ip)"
-                  [class.selected]="zonas[0].ipSeleccionada === row.ip">
-                <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
-                <td>{{ row.componente }}</td>
-                <td>{{ row.historial[row.historial.length - 1] }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <!-- TULTITLÁN -->
+  <div class="zona-column">
+    <div class="zona-titulo">TULTITLÁN</div>
+    <div class="zona-panel">
+      <div class="zona-kpis">
+        <div class="kpi-card">Total sesiones<br><strong>{{ zonas[0].total }}</strong></div>
+        <div class="kpi-card">IPs activas<br><strong>{{ zonas[0].datos.length }}</strong></div>
+        <div class="kpi-card">Prom. latencia<br><strong>{{ zonas[0].promedio }} ms</strong></div>
+        <div class="kpi-card">Pico reciente<br><strong>{{ zonas[0].maximo }}</strong></div>
       </div>
-    </div>
-  
-    <div class="zona-column">
-      <div class="zona-titulo">QUERÉTARO</div>
-      <div class="zona-panel">
-        <div class="zona-kpis">
-          <div class="kpi-card">Total sesiones<br><strong>{{ zonas[1].total }}</strong></div>
-          <div class="kpi-card">IPs activas<br><strong>{{ zonas[1].datos.length }}</strong></div>
-        </div>
-        <div class="zona-grafica">
-          <canvas baseChart
-                  [data]="getChartDataFiltered(zonas[1].datos, zonas[1].ipSeleccionada)"
-                  [options]="chartOptions"
-                  chartType="line">
-          </canvas>
-        </div>
-        <div class="zona-tabla">
-          <table class="tabla-ip">
-            <thead>
-              <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of zonas[1].datos"
-                  (click)="zonas[1].selector(row.ip)"
-                  [class.selected]="zonas[1].ipSeleccionada === row.ip">
-                <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
-                <td>{{ row.componente }}</td>
-                <td>{{ row.historial[row.historial.length - 1] }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+
+      <div class="zona-grafica">
+        <canvas baseChart
+                [data]="getChartDataFiltered(zonas[0].datos, zonas[0].ipSeleccionada)"
+                [options]="chartOptions"
+                chartType="line">
+        </canvas>
+      </div>
+
+      <div class="zona-tabla">
+        <table class="tabla-ip">
+          <thead>
+            <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of zonas[0].datos"
+                (click)="zonas[0].selector(row.ip)"
+                [class.selected]="zonas[0].ipSeleccionada === row.ip">
+              <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
+              <td>{{ row.componente }}</td>
+              <td>{{ row.historial[row.historial.length - 1] }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  
+
+  <!-- QUERÉTARO -->
+  <div class="zona-column">
+    <div class="zona-titulo">QUERÉTARO</div>
+    <div class="zona-panel">
+      <div class="zona-kpis">
+        <div class="kpi-card">Total sesiones<br><strong>{{ zonas[1].total }}</strong></div>
+        <div class="kpi-card">IPs activas<br><strong>{{ zonas[1].datos.length }}</strong></div>
+        <div class="kpi-card">Prom. latencia<br><strong>{{ zonas[1].promedio }} ms</strong></div>
+        <div class="kpi-card">Pico reciente<br><strong>{{ zonas[1].maximo }}</strong></div>
+      </div>
+
+      <div class="zona-grafica">
+        <canvas baseChart
+                [data]="getChartDataFiltered(zonas[1].datos, zonas[1].ipSeleccionada)"
+                [options]="chartOptions"
+                chartType="line">
+        </canvas>
+      </div>
+
+      <div class="zona-tabla">
+        <table class="tabla-ip">
+          <thead>
+            <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of zonas[1].datos"
+                (click)="zonas[1].selector(row.ip)"
+                [class.selected]="zonas[1].ipSeleccionada === row.ip">
+              <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
+              <td>{{ row.componente }}</td>
+              <td>{{ row.historial[row.historial.length - 1] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

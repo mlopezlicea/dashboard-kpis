@@ -25,13 +25,22 @@ export class UsuariosSesionesComponent implements OnInit {
   zonas: any[] = [];
 
   ngOnInit(): void {
+    const thisRef = this;
+
     this.zonas = [
       {
         nombre: 'TULTITLÁN',
         datos: this.sesionesTultitlan,
         get total() {
-          return this.datos.reduce((acc: number, s: SesionPorIp) => acc + s.historial[s.historial.length - 1], 0);
-        },        
+          return this.datos.reduce((acc: number, s: SesionPorIp) => acc + s.historial.at(-1)!, 0);
+        },
+        get promedio() {
+          const valores = this.datos.map((d: SesionPorIp) => d.historial.at(-1)!);
+          return Math.round(valores.reduce((a: number, b: number) => a + b, 0) / valores.length);
+        },
+        get maximo() {
+          return Math.max(...this.datos.flatMap((d: SesionPorIp) => d.historial));
+        },
         get ipSeleccionada() {
           return thisRef.selectedIpTultitlan;
         },
@@ -43,8 +52,15 @@ export class UsuariosSesionesComponent implements OnInit {
         nombre: 'QUERÉTARO',
         datos: this.sesionesQueretaro,
         get total() {
-          return this.datos.reduce((acc: number, s: SesionPorIp) => acc + s.historial[s.historial.length - 1], 0);
-        },        
+          return this.datos.reduce((acc: number, s: SesionPorIp) => acc + s.historial.at(-1)!, 0);
+        },
+        get promedio() {
+          const valores = this.datos.map((d: SesionPorIp) => d.historial.at(-1)!);
+          return Math.round(valores.reduce((a: number, b: number) => a + b, 0) / valores.length);
+        },
+        get maximo() {
+          return Math.max(...this.datos.flatMap((d: SesionPorIp) => d.historial));
+        },
         get ipSeleccionada() {
           return thisRef.selectedIpQueretaro;
         },
@@ -52,17 +68,7 @@ export class UsuariosSesionesComponent implements OnInit {
           thisRef.selectedIpQueretaro = thisRef.selectedIpQueretaro === ip ? null : ip;
         }
       }
-    ];
-  
-    const thisRef = this; // 👈 este truco permite acceder al `this` original dentro de los objetos
-  }
-  
-
-  getTotal(data: SesionPorIp[]): number {
-    return data.reduce(
-      (acc, s) => acc + s.historial[s.historial.length - 1],
-      0
-    );
+    ];    
   }
 
   getChartDataFiltered(data: SesionPorIp[], selectedIp: string | null): {
@@ -76,7 +82,7 @@ export class UsuariosSesionesComponent implements OnInit {
       datasets: filtered.map(d => ({
         label: d.ip,
         data: d.historial,
-        type: 'line', // 🔁 ESENCIAL: obliga a Chart.js a pintarlo como línea
+        type: 'line',
         fill: true,
         tension: 0.4,
         borderColor: d.color,
@@ -125,4 +131,16 @@ export class UsuariosSesionesComponent implements OnInit {
     const b = bigint & 255;
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
+
+  modalAbierto = false;
+
+  abrirModalAyuda(): void {
+    this.modalAbierto = true;
+  }
+  
+  cerrarModalAyuda(): void {
+    this.modalAbierto = false;
+  }
 }
+  
+  
