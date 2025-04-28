@@ -13,12 +13,12 @@ import { BarraTituloComponent } from './components/barra-titulo/barra-titulo.com
 import { RendimientoAplicacionComponent } from './pages/rendimiento-aplicacion/rendimiento-aplicacion.component';
 import { DashboardPrincipalComponent } from './pages/dashboard-principal/dashboard-principal.component';
 import { InfraestructuraMonitoreoComponent } from './pages/infraestructura-monitoreo/infraestructura-monitoreo.component';
-
-import { LucideAngularModule } from 'lucide-angular';
-import { icons } from 'lucide-angular';
+import { TicketsServiciosComponent } from './pages/tickets-servicios/tickets-servicios.component';
 import { TooltipFlotanteComponent } from './components/tooltip-flotante/tooltip-flotante.component';
 import { RedComponent } from './pages/red/red.component';
 
+import { LucideAngularModule } from 'lucide-angular';
+import { icons } from 'lucide-angular';
 
 @NgModule({
   declarations: [
@@ -31,8 +31,9 @@ import { RedComponent } from './pages/red/red.component';
     RendimientoAplicacionComponent,
     DashboardPrincipalComponent,
     InfraestructuraMonitoreoComponent,
+    TicketsServiciosComponent,
     TooltipFlotanteComponent,
-    RedComponent,
+    RedComponent
   ],
   imports: [
     BrowserModule,
