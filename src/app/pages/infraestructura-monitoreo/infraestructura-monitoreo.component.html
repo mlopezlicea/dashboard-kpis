@@ -13,9 +13,12 @@
 <div class="dashboard-doble-columna">
   <!-- TULTITLÁN -->
   <div class="zona-column">
-    <div class="alerta-kpi" [ngClass]="getClaseContadorCritico(infraTultitlan)">
-      🔴 Alertas Críticas: {{ contarCriticas(infraTultitlan) }}
-    </div>
+    <div class="alerta-kpi" 
+    [ngClass]="getClaseContadorCritico(infraTultitlan)" 
+    (click)="abrirModalCriticos('TULTITLAN')">
+    🔴 Alertas Críticas: {{ contarCriticas(infraTultitlan) }}
+  </div>
+  
     <div class="zona-titulo">TULTITLÁN</div>
     <table class="tabla-ip">
       <thead>
@@ -33,30 +36,55 @@
         <tr *ngFor="let s of infraTultitlan">
           <td>{{ s.servidor }}</td>
           <td [ngClass]="getClaseAlarma(s.cpu)">
-            {{ s.cpu }}% <span *ngIf="s.cpu >= 90" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.cpu >= 71 && s.cpu < 90" class="icono-alerta advertencia">⚠️</span>
+            {{ s.cpu }}%
+            <span *ngIf="s.cpu >= 90" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'CPU crítica: uso mayor al 90%')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.cpu >= 71 && s.cpu < 90" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'CPU alta: uso entre 71% y 89%')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseAlarma(s.ram)">
-            {{ s.ram }}% <span *ngIf="s.ram >= 90" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.ram >= 71 && s.ram < 90" class="icono-alerta advertencia">⚠️</span>
+            {{ s.ram }}%
+            <span *ngIf="s.ram >= 90" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'RAM crítica: uso mayor al 90%')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.ram >= 71 && s.ram < 90" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'RAM alta: uso entre 71% y 89%')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseAlarma(s.fs)">
-            {{ s.fs }}% <span *ngIf="s.fs >= 90" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.fs >= 71 && s.fs < 90" class="icono-alerta advertencia">⚠️</span>
+            {{ s.fs }}%
+            <span *ngIf="s.fs >= 90" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'File System crítico: uso mayor al 90%')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.fs >= 71 && s.fs < 90" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'File System alto: uso entre 71% y 89%')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseServicios(s.estadoServicios)">
             {{ s.estadoServicios }}
-            <span *ngIf="s.estadoServicios === 'Caído'" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.estadoServicios === 'Degradado'" class="icono-alerta advertencia">⚠️</span>
+            <span *ngIf="s.estadoServicios === 'Caído'" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'Servicio caído')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.estadoServicios === 'Degradado'" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'Servicio degradado')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseMetricas(s.tieneMetricas)">
             {{ s.tieneMetricas ? 'No' : 'Sí' }}
-            <span *ngIf="!s.tieneMetricas" class="icono-alerta critico">⛔️</span>
+            <span *ngIf="!s.tieneMetricas" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'Sin métricas disponibles')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
           </td>
           <td [ngClass]="getClaseLatencia(s.latenciaRed)">
             {{ s.latenciaRed }} ms
-            <span *ngIf="s.latenciaRed > 60" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.latenciaRed > 30 && s.latenciaRed <= 60" class="icono-alerta advertencia">⚠️</span>
+            <span *ngIf="s.latenciaRed > 60" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'Latencia crítica: mayor a 60ms')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.latenciaRed > 30 && s.latenciaRed <= 60" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'Latencia alta: entre 30ms y 60ms')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
         </tr>
       </tbody>
@@ -65,9 +93,11 @@
 
   <!-- QUERÉTARO -->
   <div class="zona-column">
-    <div class="alerta-kpi" [ngClass]="getClaseContadorCritico(infraQueretaro)">
-      🔴 Alertas Críticas: {{ contarCriticas(infraQueretaro) }}
-    </div>
+    <div class="alerta-kpi" 
+    [ngClass]="getClaseContadorCritico(infraQueretaro)" 
+    (click)="abrirModalCriticos('QUERETARO')">
+    🔴 Alertas Críticas: {{ contarCriticas(infraQueretaro) }}
+   </div>
     <div class="zona-titulo">QUERÉTARO</div>
     <table class="tabla-ip">
       <thead>
@@ -85,33 +115,87 @@
         <tr *ngFor="let s of infraQueretaro">
           <td>{{ s.servidor }}</td>
           <td [ngClass]="getClaseAlarma(s.cpu)">
-            {{ s.cpu }}% <span *ngIf="s.cpu >= 90" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.cpu >= 71 && s.cpu < 90" class="icono-alerta advertencia">⚠️</span>
+            {{ s.cpu }}%
+            <span *ngIf="s.cpu >= 90" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'CPU crítica: uso mayor al 90%')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.cpu >= 71 && s.cpu < 90" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'CPU alta: uso entre 71% y 89%')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseAlarma(s.ram)">
-            {{ s.ram }}% <span *ngIf="s.ram >= 90" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.ram >= 71 && s.ram < 90" class="icono-alerta advertencia">⚠️</span>
+            {{ s.ram }}%
+            <span *ngIf="s.ram >= 90" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'RAM crítica: uso mayor al 90%')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.ram >= 71 && s.ram < 90" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'RAM alta: uso entre 71% y 89%')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseAlarma(s.fs)">
-            {{ s.fs }}% <span *ngIf="s.fs >= 90" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.fs >= 71 && s.fs < 90" class="icono-alerta advertencia">⚠️</span>
+            {{ s.fs }}%
+            <span *ngIf="s.fs >= 90" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'File System crítico: uso mayor al 90%')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.fs >= 71 && s.fs < 90" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'File System alto: uso entre 71% y 89%')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseServicios(s.estadoServicios)">
             {{ s.estadoServicios }}
-            <span *ngIf="s.estadoServicios === 'Caído'" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.estadoServicios === 'Degradado'" class="icono-alerta advertencia">⚠️</span>
+            <span *ngIf="s.estadoServicios === 'Caído'" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'Servicio caído')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.estadoServicios === 'Degradado'" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'Servicio degradado')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
           <td [ngClass]="getClaseMetricas(s.tieneMetricas)">
             {{ s.tieneMetricas ? 'No' : 'Sí' }}
-            <span *ngIf="!s.tieneMetricas" class="icono-alerta critico">⛔️</span>
+            <span *ngIf="!s.tieneMetricas" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'Sin métricas disponibles')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
           </td>
           <td [ngClass]="getClaseLatencia(s.latenciaRed)">
             {{ s.latenciaRed }} ms
-            <span *ngIf="s.latenciaRed > 60" class="icono-alerta critico">⛔️</span>
-            <span *ngIf="s.latenciaRed > 30 && s.latenciaRed <= 60" class="icono-alerta advertencia">⚠️</span>
+            <span *ngIf="s.latenciaRed > 60" class="icono-alerta critico"
+              (mouseenter)="mostrarTooltip($event, 'Latencia crítica: mayor a 60ms')"
+              (mouseleave)="ocultarTooltip()">⛔️</span>
+            <span *ngIf="s.latenciaRed > 30 && s.latenciaRed <= 60" class="icono-alerta advertencia"
+              (mouseenter)="mostrarTooltip($event, 'Latencia alta: entre 30ms y 60ms')"
+              (mouseleave)="ocultarTooltip()">⚠️</span>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<!-- Tooltip flotante -->
+<app-tooltip-flotante 
+  [visible]="tooltipVisible" 
+  [mensaje]="tooltipMensaje" 
+  [x]="tooltipX" 
+  [y]="tooltipY">
+</app-tooltip-flotante>
+
+<app-modal-ayuda
+  [visible]="modalCriticosAbierto"
+  [titulo]="'Alertas Críticas - ' + zonaCriticaSeleccionada"
+  [mensaje]="''"
+  (cerrar)="cerrarModalCriticos()">
+  
+  <div class="lista-criticos">
+    <div *ngIf="alertasCriticas.length > 0; else sinAlertas">
+      <ul>
+        <li *ngFor="let alerta of alertasCriticas">
+          <strong>{{ alerta.servidor }}</strong> - {{ alerta.descripcion }}
+        </li>
+      </ul>
+    </div>
+    <ng-template #sinAlertas>
+      <p>No hay alertas críticas en esta zona 🎉</p>
+    </ng-template>
+  </div>
+  
+</app-modal-ayuda>

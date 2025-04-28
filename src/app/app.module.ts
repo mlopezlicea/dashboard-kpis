@@ -16,6 +16,8 @@ import { InfraestructuraMonitoreoComponent } from './pages/infraestructura-monit
 
 import { LucideAngularModule } from 'lucide-angular';
 import { icons } from 'lucide-angular';
+import { TooltipFlotanteComponent } from './components/tooltip-flotante/tooltip-flotante.component';
+import { RedComponent } from './pages/red/red.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { icons } from 'lucide-angular';
     RendimientoAplicacionComponent,
     DashboardPrincipalComponent,
     InfraestructuraMonitoreoComponent,
+    TooltipFlotanteComponent,
+    RedComponent,
   ],
   imports: [
     BrowserModule,

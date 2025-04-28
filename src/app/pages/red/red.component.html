@@ -1,0 +1,89 @@
+<app-barra-titulo
+  [titulo]="'RED Y CONECTIVIDAD'"
+  (clickAyuda)="abrirModalAyuda()">
+</app-barra-titulo>
+
+<app-modal-ayuda
+  [visible]="modalAbierto"
+  [titulo]="'¿Qué muestra este apartado?'"
+  [mensaje]="'Este módulo muestra el estado de conectividad de los sitios Tultitlán y Querétaro, incluyendo monitoreo de puertos críticos, estado de VPN, DMZ y latencia en URLs internas y externas.'"
+  (cerrar)="cerrarModalAyuda()">
+</app-modal-ayuda>
+
+<div class="dashboard-doble-columna">
+  <!-- TULTITLÁN -->
+  <div class="zona-column">
+    <div class="zona-titulo">TULTITLÁN</div>
+    <div class="zona-panel">
+        <div class="zona-kpis-grid">
+            <div class="kpi-card" *ngFor="let kpi of kpisTultitlan" [ngClass]="kpi.color">
+              {{ kpi.titulo }}<br>
+              <strong>{{ kpi.valor }} <span *ngIf="kpi.unidad">{{ kpi.unidad }}</span></strong>
+            </div>
+          </div>          
+    </div>
+
+    <table class="servidores-table">
+      <thead>
+        <tr>
+          <th>Servidor</th>
+          <th>IP</th>
+          <th>Puertos</th>
+          <th>VPN</th>
+          <th>DMZ</th>
+          <th>URLs Internas</th>
+          <th>URLs Externas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servidor of servidoresTultitlan">
+          <td>{{ servidor.nombre }}</td>
+          <td>{{ servidor.ip }}</td>
+          <td>{{ servidor.puertos }}</td>
+          <td>{{ servidor.vpn }}</td>
+          <td>{{ servidor.dmz }}</td>
+          <td>{{ servidor.urlsInternas }}</td>
+          <td>{{ servidor.urlsExternas }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QUERÉTARO -->
+  <div class="zona-column">
+    <div class="zona-titulo">QUERÉTARO</div>
+    <div class="zona-panel">
+        <div class="zona-kpis-grid">
+            <div class="kpi-card" *ngFor="let kpi of kpisQueretaro" [ngClass]="kpi.color">
+              {{ kpi.titulo }}<br>
+              <strong>{{ kpi.valor }} <span *ngIf="kpi.unidad">{{ kpi.unidad }}</span></strong>
+            </div>
+          </div>          
+    </div>
+
+    <table class="servidores-table">
+      <thead>
+        <tr>
+          <th>Servidor</th>
+          <th>IP</th>
+          <th>Puertos</th>
+          <th>VPN</th>
+          <th>DMZ</th>
+          <th>URLs Internas</th>
+          <th>URLs Externas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servidor of servidoresQueretaro">
+          <td>{{ servidor.nombre }}</td>
+          <td>{{ servidor.ip }}</td>
+          <td>{{ servidor.puertos }}</td>
+          <td>{{ servidor.vpn }}</td>
+          <td>{{ servidor.dmz }}</td>
+          <td>{{ servidor.urlsInternas }}</td>
+          <td>{{ servidor.urlsExternas }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
