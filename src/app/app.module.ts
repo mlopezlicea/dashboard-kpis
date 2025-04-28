@@ -16,6 +16,7 @@ import { InfraestructuraMonitoreoComponent } from './pages/infraestructura-monit
 
 import { LucideAngularModule } from 'lucide-angular';
 import { icons } from 'lucide-angular';
+import { TicketsServiciosComponent } from './pages/tickets-servicios/tickets-servicios.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { icons } from 'lucide-angular';
     RendimientoAplicacionComponent,
     DashboardPrincipalComponent,
     InfraestructuraMonitoreoComponent,
+    TicketsServiciosComponent,
   ],
   imports: [
     BrowserModule,

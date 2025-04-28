@@ -1,0 +1,47 @@
+<app-barra-titulo
+  [titulo]="'TICKETS'"
+  (clickAyuda)="abrirModalAyuda()">
+</app-barra-titulo>
+
+<app-modal-ayuda
+  [visible]="modalAbierto"
+  [titulo]="'¿Qué muestra este apartado?'"
+  [mensaje]="'Este panel permite visualizar el listado de tickets generados automáticamente, el estado actual de los servicios del SMC, el tiempo promedio entre la generación de tickets y el estado de las APIs principales como Ticket API y el Gestor Documental.'"
+  (cerrar)="cerrarModalAyuda()">
+</app-modal-ayuda>
+
+<div class="listado-tickets">
+    <h2>Listado de Tickets Automáticos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Estado</th>
+          <th>Fecha de Creación</th>
+          <th>Fecha de Cierre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td>{{ ticket.id }}</td>
+          <td>{{ ticket.nombre }}</td>
+          <td>{{ ticket.estado }}</td>
+          <td>{{ ticket.fechaCreacion | date:'short' }}</td>
+          <td>{{ ticket.fechaCierre ? (ticket.fechaCierre | date:'short') : 'Pendiente' }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<div class="graficas">
+    <div class="grafica">
+        <h2>Estado de Servicios del SMC</h2>
+        <canvas id="serviciosChart"></canvas>
+    </div>
+
+    <div class="grafica">
+        <h2>Estado de APIs</h2>
+        <canvas id="apisChart"></canvas>
+    </div>
+</div>
