@@ -1,0 +1,119 @@
+.dashboard-doble-columna {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    padding: 24px;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .zona-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1 1 48%;
+    min-width: 500px;
+  }
+  
+  .zona-titulo {
+    background-color: #0B0B0B;
+    color: #F0F0F0;
+    padding: 12px 20px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .zona-panel {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: stretch;
+  }
+  
+  .zona-kpis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* ✅ Estirar uniformemente */
+    gap: 16px;
+    width: 100%; /* ✅ Ocupar todo el ancho */
+  }
+  
+  .kpi-card {
+    background-color: #0D0F5C;
+    color: #FFF;
+    padding: 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease-in-out;
+    height: 100%;
+  
+    strong {
+      font-size: 1.8rem;
+      display: block;
+      margin-top: 8px;
+    }
+  
+    &.green {
+      border-top: 4px solid #4CAF50;
+    }
+  
+    &.yellow {
+      border-top: 4px solid #FFC107;
+    }
+  
+    &.red {
+      border-top: 4px solid #F44336;
+    }
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  
+  
+  /* ✅ Estilos para la tabla de servidores */
+  .servidores-table {
+    width: 100%;
+    margin-top: 16px;
+    border-collapse: collapse;
+    background-color: #1E1E2E;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      color: #F0F0F0;
+    }
+  
+    th {
+      background-color: #292B36;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #444;
+    }
+  
+    tbody tr {
+      border-bottom: 1px solid #333;
+      transition: background-color 0.2s;
+    }
+  
+    tbody tr:hover {
+      background-color: #2C2F3A;
+    }
+  }
+  
+  /* (opcional si quieres separar bien cada zona) */
+  table.servidores-table + .servidores-table {
+    margin-top: 32px;
+  }
+  

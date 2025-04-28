@@ -1,8 +1,12 @@
 <div class="modal-backdrop" *ngIf="visible">
-    <div class="modal">
-      <button class="close-button" (click)="cerrarModal()">×</button>
-      <h3>{{ titulo }}</h3>
-      <p>{{ mensaje }}</p>
-    </div>
+  <div class="modal">
+    <button class="close-button" (click)="cerrarModal()">×</button>
+    <h3>{{ titulo }}</h3>
+
+    <!-- Si el usuario inserta contenido, se muestra aquí -->
+    <ng-content></ng-content>
+
+    <!-- Si no se inserta nada, se muestra el mensaje normal -->
+    <p *ngIf="!hasContent">{{ mensaje }}</p>
   </div>
-  
+</div>
