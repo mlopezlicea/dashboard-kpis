@@ -1,0 +1,126 @@
+.dashboard-doble-columna {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  padding: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.zona-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1 1 48%;
+  min-width: 500px;
+}
+
+.zona-titulo {
+  background-color: #0B0B0B;
+  color: #F0F0F0;
+  padding: 12px 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 8px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.zona-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+  background-color: #10101a;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.zona-kpis {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap;
+
+  @media (max-width: 800px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.kpi-card {
+  background-color: #0D0F5C;
+  color: #FFF;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  flex: 1 1 0;
+  text-align: center;
+  min-width: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+  .kpi-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    margin-bottom: 8px;
+
+    i {
+      font-size: 1.2rem;
+      color: #fff;
+    }
+  }
+
+  strong {
+    font-size: 1.5rem;
+    display: block;
+  }
+}
+
+.zona-tabla {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.tabla-ip {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead th {
+    background-color: #1A1A1A;
+    color: #FFF;
+    padding: 10px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  tbody td {
+    color: #CCC;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    font-size: 13px;
+  }
+
+  tr:hover {
+    background-color: #222;
+  }
+}
+
+.estado-ok {
+  color: #4caf50;
+  font-weight: bold;
+}
+.estado-warning {
+  color: #ff9800;
+  font-weight: bold;
+}
+.estado-critico {
+  color: #f44336;
+  font-weight: bold;
+}

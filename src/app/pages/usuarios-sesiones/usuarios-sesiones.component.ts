@@ -141,6 +141,42 @@ export class UsuariosSesionesComponent implements OnInit {
   cerrarModalAyuda(): void {
     this.modalAbierto = false;
   }
+
+  getGaugeColor(latencia: number): string {
+  if (latencia < 60) return '#4caf50';     // verde
+  if (latencia < 120) return '#ff9800';    // amarillo
+  return '#f44336';                        // rojo
+}
+
+getConcurrenciaActual(datos: any[]): number {
+  return datos.reduce((acc, ip) => {
+    const ultimoValor = ip.historial[ip.historial.length - 1] || 0;
+    return acc + ultimoValor;
+  }, 0);
+}
+
+getIpSeleccionadaInfo(zonaIndex: number): any {
+  const ipSeleccionada = this.zonas[zonaIndex].ipSeleccionada;
+  return this.zonas[zonaIndex].datos.find((d: any) => d.ip === ipSeleccionada);
+}
+
+getErroresHttpZona(index: number): number {
+  return this.zonas[index].datos.reduce((acc: number, d: any) => acc + (d.erroresHttp || 0), 0);
+}
+
+getCaidasZona(index: number): number {
+  return this.zonas[index].datos.reduce((acc: number, d: any) => acc + (d.caidasRecientes || 0), 0);
+}
+
+getFallosZona(index: number): number {
+  return this.zonas[index].datos.reduce((acc: number, d: any) => acc + (d.intentosFallidos || 0), 0);
+}
+
+getInactivasZona(index: number): number {
+  return this.zonas[index].datos.filter((d: any) => (d.historial.at(-1) || 0) === 0).length;
+}
+
+
 }
   
   

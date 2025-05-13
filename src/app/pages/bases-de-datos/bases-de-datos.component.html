@@ -1,0 +1,109 @@
+<app-barra-titulo 
+  [titulo]="'BASES DE DATOS'"
+  (clickAyuda)="abrirModalAyuda()">
+</app-barra-titulo>
+
+<app-modal-ayuda
+  [visible]="modalAbierto"
+  [titulo]="'¿Qué muestra este apartado?'"
+  [mensaje]="'Este panel muestra las bases de datos activas por zona, con su estado, ambiente, sesiones activas y KPIs.'"
+  (cerrar)="cerrarModalAyuda()">
+</app-modal-ayuda>
+
+<div class="dashboard-doble-columna" *ngIf="!cargando">
+  <!-- ZONA TULTITLÁN -->
+  <div class="zona-column">
+    <div class="zona-titulo">TULTITLÁN</div>
+    <div class="zona-panel">
+
+      <div class="zona-kpis">
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-database"></i> Total BDs</div>
+          <strong>{{ basesTultitlan.length }}</strong>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-check-circle"></i> OK</div>
+          <strong>{{ okTultitlan }}</strong>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-exclamation-triangle"></i> Advertencias</div>
+          <strong>{{ advertenciasTultitlan }}</strong>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-times-circle"></i> Críticas</div>
+          <strong>{{ criticosTultitlan }}</strong>
+        </div>
+      </div>
+
+      <div class="zona-tabla">
+        <table class="tabla-ip">
+          <thead>
+            <tr>
+              <th>Nombre</th><th>IP</th><th>Estado</th>
+              <th>Ambiente</th><th>Monitoreo</th><th>Sesiones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bd of basesTultitlan">
+              <td>{{ bd.nombre }}</td>
+              <td>{{ bd.ip_gestion }}</td>
+              <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
+              <td>{{ bd.ambiente_val }}</td>
+              <td>{{ bd.en_monitoreo }}</td>
+              <td>{{ bd.sesiones_activas }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ZONA QUERÉTARO -->
+  <div class="zona-column">
+    <div class="zona-titulo">QUERÉTARO</div>
+    <div class="zona-panel">
+
+      <div class="zona-kpis">
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-database"></i> Total BDs</div>
+          <strong>{{ basesQueretaro.length }}</strong>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-check-circle"></i> OK</div>
+          <strong>{{ okQueretaro }}</strong>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-exclamation-triangle"></i> Advertencias</div>
+          <strong>{{ advertenciasQueretaro }}</strong>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-times-circle"></i> Críticas</div>
+        <strong>{{ criticosQueretaro }}</strong>
+        </div>
+      </div>
+
+      <div class="zona-tabla">
+        <table class="tabla-ip">
+          <thead>
+            <tr>
+              <th>Nombre</th><th>IP</th><th>Estado</th>
+              <th>Ambiente</th><th>Monitoreo</th><th>Sesiones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bd of basesQueretaro">
+              <td>{{ bd.nombre }}</td>
+              <td>{{ bd.ip_gestion }}</td>
+              <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
+              <td>{{ bd.ambiente_val }}</td>
+              <td>{{ bd.en_monitoreo }}</td>
+              <td>{{ bd.sesiones_activas }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

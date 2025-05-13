@@ -16,7 +16,11 @@ import { InfraestructuraMonitoreoComponent } from './pages/infraestructura-monit
 import { TicketsServiciosComponent } from './pages/tickets-servicios/tickets-servicios.component';
 import { TooltipFlotanteComponent } from './components/tooltip-flotante/tooltip-flotante.component';
 import { RedComponent } from './pages/red/red.component';
+import { BasesDeDatosComponent } from './pages/bases-de-datos/bases-de-datos.component';
+import { HttpClientModule } from '@angular/common/http';
 
+
+import { NgxGaugeModule } from 'ngx-gauge';
 import { LucideAngularModule } from 'lucide-angular';
 import { icons } from 'lucide-angular';
 
@@ -33,13 +37,16 @@ import { icons } from 'lucide-angular';
     InfraestructuraMonitoreoComponent,
     TicketsServiciosComponent,
     TooltipFlotanteComponent,
-    RedComponent
+    RedComponent,
+    BasesDeDatosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
+    HttpClientModule,
     NgChartsModule,
+    NgxGaugeModule,
     LucideAngularModule.pick({
       Cpu: icons.Cpu,
       MemoryStick: icons.MemoryStick,
@@ -47,7 +54,7 @@ import { icons } from 'lucide-angular';
       ServerCog: icons.ServerCog,
       Ban: icons.Ban,
       Globe: icons.Globe
-    })    
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

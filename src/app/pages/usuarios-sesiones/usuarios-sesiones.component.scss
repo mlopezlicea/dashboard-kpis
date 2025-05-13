@@ -1,3 +1,5 @@
+
+
 .dashboard-doble-columna {
   display: flex;
   flex-direction: row;
@@ -29,17 +31,26 @@
 
 .zona-panel {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 24px;
   align-items: stretch;
+  background-color: #10101a;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
 .zona-kpis {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 16px;
-  flex: 0.6;
-  min-width: 160px;
+  flex-wrap: nowrap;
+
+  @media (max-width: 800px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .kpi-card {
@@ -49,28 +60,42 @@
   border-radius: 10px;
   font-size: 1rem;
   font-weight: 500;
-  height: 100%;
+  flex: 1 1 0;
+  text-align: center;
+  min-width: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+  .kpi-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    margin-bottom: 8px;
+
+    i {
+      font-size: 1.2rem;
+      color: #fff;
+    }
+  }
 
   strong {
     font-size: 1.5rem;
     display: block;
-    margin-top: 8px;
   }
 }
 
 .zona-grafica {
-  flex: 2;
   background-color: #1E1E2E;
   padding: 16px;
   border-radius: 10px;
   min-width: 300px;
+  min-height: 280px;
 }
 
 .zona-tabla {
-  flex: 1.2;
-  min-width: 250px;
   overflow-x: auto;
+  margin-top: 16px;
 }
 
 .tabla-ip {
@@ -154,4 +179,150 @@
 .estado-critico {
   color: #f44336;
   font-weight: bold;
+}
+
+.kpi-trend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  gap: 4px;
+
+  i {
+    font-size: 0.9rem;
+  }
+
+  &.up {
+    color: #4caf50; // verde
+  }
+
+  &.down {
+    color: #f44336; // rojo
+  }
+
+  &.neutral {
+    color: #bbb;
+  }
+}
+
+.zona-gauges-doble {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 12px 0;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+
+  .gauge-wrapper {
+    background-color: #181818;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+
+  ngx-gauge {
+    width: 100%;
+    max-width: 200px;
+
+    .gauge__value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .gauge__label {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-top: 4px;
+    }
+
+    .gauge__append {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    svg {
+      filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.2));
+    }
+  }
+}
+
+.kpi-extra {
+  background-color: #141428;
+  color: #ddd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: 8px;
+}
+
+.ip-gauges {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+
+  .gauge-wrapper {
+    background-color: #181818;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+
+  ngx-gauge {
+    width: 100%;
+    max-width: 120px;
+
+    .gauge__value {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .gauge__label {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-top: 4px;
+    }
+
+    .gauge__append {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    svg {
+      filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.2));
+    }
+  }
+}
+
+.estado-badge {
+  padding: 2px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+
+  &.activo {
+    background-color: #4caf50;
+  }
+
+  &.degradado {
+    background-color: #ff9800;
+  }
+
+  &.caido {
+    background-color: #f44336;
+  }
 }

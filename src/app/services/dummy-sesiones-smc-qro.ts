@@ -3,30 +3,80 @@ export const SESIONES_SMC_QRO = [
     ip: '10.180.199.28',
     componente: 'MIDDLEWARE',
     color: '#3498DB',
-    historial: [10, 12, 14, 15, 15, 14, 15]
+    historial: [10, 12, 14, 15, 15, 14, 15],
+    concurrenciaMaxima: 15,
+    promedioSesion: 13.57,
+    tiempoSesionPromedio: 42,
+    erroresHttp: 2,
+    intentosFallidos: 1,
+    estadoServicio: 'Activo',
+    caidasRecientes: 0,
+    usoCpu: 62,
+    usoRam: 55,
+    tiempoRespuesta: 210
   },
   {
     ip: '10.180.199.183',
     componente: 'TICKET-API-ADMIN',
     color: '#E67E22',
-    historial: [18, 19, 20, 20, 22, 21, 20]
+    historial: [18, 19, 20, 20, 22, 21, 20],
+    concurrenciaMaxima: 22,
+    promedioSesion: 20,
+    tiempoSesionPromedio: 38,
+    erroresHttp: 5,
+    intentosFallidos: 2,
+    estadoServicio: 'Degradado',
+    caidasRecientes: 1,
+    usoCpu: 78,
+    usoRam: 69,
+    tiempoRespuesta: 380
   },
   {
     ip: '10.180.199.56',
     componente: 'SMCv1-MARIA',
     color: '#2ECC71',
-    historial: [28, 30, 31, 33, 33, 32, 33]
+    historial: [28, 30, 31, 33, 33, 32, 33],
+    concurrenciaMaxima: 33,
+    promedioSesion: 31.43,
+    tiempoSesionPromedio: 47,
+    erroresHttp: 1,
+    intentosFallidos: 0,
+    estadoServicio: 'Activo',
+    caidasRecientes: 0,
+    usoCpu: 53,
+    usoRam: 60,
+    tiempoRespuesta: 190
   },
   {
     ip: '10.180.199.195',
     componente: 'ETLS',
     color: '#9B59B6',
-    historial: [9, 10, 11, 12, 12, 11, 12]
+    historial: [9, 10, 11, 12, 12, 11, 12],
+    concurrenciaMaxima: 12,
+    promedioSesion: 11,
+    tiempoSesionPromedio: 35,
+    erroresHttp: 0,
+    intentosFallidos: 1,
+    estadoServicio: 'Activo',
+    caidasRecientes: 0,
+    usoCpu: 48,
+    usoRam: 43,
+    tiempoRespuesta: 160
   },
   {
     ip: '10.71.23.210',
     componente: 'REPORTES',
     color: '#C0392B',
-    historial: [6, 7, 8, 9, 9, 8, 9]
+    historial: [6, 7, 8, 9, 9, 8, 9],
+    concurrenciaMaxima: 9,
+    promedioSesion: 8,
+    tiempoSesionPromedio: 29,
+    erroresHttp: 4,
+    intentosFallidos: 3,
+    estadoServicio: 'Degradado',
+    caidasRecientes: 2,
+    usoCpu: 70,
+    usoRam: 75,
+    tiempoRespuesta: 410
   }
 ];

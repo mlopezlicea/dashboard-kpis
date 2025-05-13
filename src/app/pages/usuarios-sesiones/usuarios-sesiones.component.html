@@ -1,9 +1,8 @@
-<app-barra-titulo
+ <app-barra-titulo 
   [titulo]="'SESIONES'"
   (clickAyuda)="abrirModalAyuda()">
 </app-barra-titulo>
 
-<!-- Modal de ayuda (visible controlado por booleano) -->
 <app-modal-ayuda
   [visible]="modalAbierto"
   [titulo]="'¿Qué muestra este apartado?'"
@@ -11,32 +10,69 @@
   (cerrar)="cerrarModalAyuda()">
 </app-modal-ayuda>
 
-
-
 <div class="dashboard-doble-columna">
-  <!-- TULTITLÁN -->
-  <div class="zona-column">
-    <div class="zona-titulo">TULTITLÁN</div>
-    <div class="zona-panel">
+  <!-- ZONA: TULTITLÁN -->
+      <div class="zona-column">
+        <div class="zona-titulo">TULTITLÁN</div>
+        <div class="zona-panel">
       <div class="zona-kpis">
-        <div class="kpi-card">Total sesiones<br><strong>{{ zonas[0].total }}</strong></div>
-        <div class="kpi-card">IPs activas<br><strong>{{ zonas[0].datos.length }}</strong></div>
-        <div class="kpi-card">Prom. latencia<br><strong>{{ zonas[0].promedio }} ms</strong></div>
-        <div class="kpi-card">Pico reciente<br><strong>{{ zonas[0].maximo }}</strong></div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-users"></i> Total sesiones</div>
+          <strong>{{ zonas[0].total }}</strong>
+          <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +5% desde ayer</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-network-wired"></i> IPs activas</div>
+          <strong>{{ zonas[0].datos.length }}</strong>
+          <span class="kpi-trend down"><i class="fas fa-arrow-down"></i> -2% desde ayer</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-tachometer-alt"></i> Prom. latencia</div>
+          <strong>{{ zonas[0].promedio }} ms</strong>
+          <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +1ms</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-bolt"></i> Pico reciente</div>
+          <strong>{{ zonas[0].maximo }}</strong>
+          <span class="kpi-trend neutral"><i class="fas fa-minus"></i> sin cambios</span>
+        </div>
       </div>
 
+          <!-- Métricas adicionales de errores, fallas e inactividad -->
+      <div class="zona-kpis">
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-exclamation-triangle"></i> Errores HTTP</div>
+          <strong>{{ getErroresHttpZona(0) }}</strong>
+          <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +1 desde ayer</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-power-off"></i> Caídas recientes</div>
+          <strong>{{ getCaidasZona(0) }}</strong>
+          <span class="kpi-trend neutral"><i class="fas fa-minus"></i> sin cambios</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-user-lock"></i> Intentos fallidos</div>
+          <strong>{{ getFallosZona(0) }}</strong>
+          <span class="kpi-trend down"><i class="fas fa-arrow-down"></i> -2 respecto a ayer</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><i class="fas fa-plug"></i> Inactivas</div>
+          <strong>{{ getInactivasZona(0) }}</strong>
+          <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +3 nuevos inactivos</span>
+        </div>
+      </div>
+
+
       <div class="zona-grafica">
-        <canvas baseChart
-                [data]="getChartDataFiltered(zonas[0].datos, zonas[0].ipSeleccionada)"
-                [options]="chartOptions"
-                chartType="line">
+        <canvas baseChart [data]="getChartDataFiltered(zonas[0].datos, zonas[0].ipSeleccionada)"
+                [options]="chartOptions" chartType="line">
         </canvas>
       </div>
 
       <div class="zona-tabla">
         <table class="tabla-ip">
           <thead>
-            <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
+            <tr><th>IP</th><th>Componente</th><th>Estado</th><th>CPU</th><th>RAM</th><th>Errores</th><th>Última sesión</th></tr>
           </thead>
           <tbody>
             <tr *ngFor="let row of zonas[0].datos"
@@ -44,6 +80,12 @@
                 [class.selected]="zonas[0].ipSeleccionada === row.ip">
               <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
               <td>{{ row.componente }}</td>
+              <td><span class="estado-badge" [class.activo]="row.estadoServicio === 'Activo'"
+                                             [class.degradado]="row.estadoServicio === 'Degradado'"
+                                             [class.caido]="row.estadoServicio === 'Caído'">{{ row.estadoServicio }}</span></td>
+              <td>{{ row.usoCpu }}%</td>
+              <td>{{ row.usoRam }}%</td>
+              <td>{{ row.erroresHttp }}</td>
               <td>{{ row.historial[row.historial.length - 1] }}</td>
             </tr>
           </tbody>
@@ -52,41 +94,95 @@
     </div>
   </div>
 
-  <!-- QUERÉTARO -->
+  <!-- ZONA: QUERÉTARO -->
   <div class="zona-column">
-    <div class="zona-titulo">QUERÉTARO</div>
-    <div class="zona-panel">
-      <div class="zona-kpis">
-        <div class="kpi-card">Total sesiones<br><strong>{{ zonas[1].total }}</strong></div>
-        <div class="kpi-card">IPs activas<br><strong>{{ zonas[1].datos.length }}</strong></div>
-        <div class="kpi-card">Prom. latencia<br><strong>{{ zonas[1].promedio }} ms</strong></div>
-        <div class="kpi-card">Pico reciente<br><strong>{{ zonas[1].maximo }}</strong></div>
-      </div>
+  <div class="zona-titulo">QUERÉTARO</div>
+  <div class="zona-panel">
 
-      <div class="zona-grafica">
-        <canvas baseChart
-                [data]="getChartDataFiltered(zonas[1].datos, zonas[1].ipSeleccionada)"
-                [options]="chartOptions"
-                chartType="line">
-        </canvas>
+    <!-- KPIs principales -->
+    <div class="zona-kpis">
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-users"></i> Total sesiones</div>
+        <strong>{{ zonas[1].total }}</strong>
+        <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +8% desde ayer</span>
       </div>
-
-      <div class="zona-tabla">
-        <table class="tabla-ip">
-          <thead>
-            <tr><th>IP</th><th>Componente</th><th>Última sesión</th></tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let row of zonas[1].datos"
-                (click)="zonas[1].selector(row.ip)"
-                [class.selected]="zonas[1].ipSeleccionada === row.ip">
-              <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
-              <td>{{ row.componente }}</td>
-              <td>{{ row.historial[row.historial.length - 1] }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-network-wired"></i> IPs activas</div>
+        <strong>{{ zonas[1].datos.length }}</strong>
+        <span class="kpi-trend neutral"><i class="fas fa-minus"></i> sin cambios</span>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-tachometer-alt"></i> Prom. latencia</div>
+        <strong>{{ zonas[1].promedio }} ms</strong>
+        <span class="kpi-trend down"><i class="fas fa-arrow-down"></i> -2ms</span>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-bolt"></i> Pico reciente</div>
+        <strong>{{ zonas[1].maximo }}</strong>
+        <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +1%</span>
       </div>
     </div>
+
+    <!-- KPIs adicionales -->
+    <div class="zona-kpis">
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-exclamation-triangle"></i> Errores HTTP</div>
+        <strong>{{ getErroresHttpZona(1) }}</strong>
+        <span class="kpi-trend down"><i class="fas fa-arrow-down"></i> -1 desde ayer</span>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-power-off"></i> Caídas recientes</div>
+        <strong>{{ getCaidasZona(1) }}</strong>
+        <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +2 reportadas</span>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-user-lock"></i> Intentos fallidos</div>
+        <strong>{{ getFallosZona(1) }}</strong>
+        <span class="kpi-trend neutral"><i class="fas fa-minus"></i> sin cambios</span>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-header"><i class="fas fa-plug"></i> Inactivas</div>
+        <strong>{{ getInactivasZona(1) }}</strong>
+        <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> +1 nuevo</span>
+      </div>
+    </div>
+
+    <!-- Gráfica -->
+    <div class="zona-grafica">
+      <canvas baseChart
+              [data]="getChartDataFiltered(zonas[1].datos, zonas[1].ipSeleccionada)"
+              [options]="chartOptions"
+              chartType="line">
+      </canvas>
+    </div>
+
+    <!-- Tabla -->
+    <div class="zona-tabla">
+      <table class="tabla-ip">
+        <thead>
+          <tr>
+            <th>IP</th><th>Componente</th><th>Estado</th>
+            <th>CPU</th><th>RAM</th><th>Errores</th><th>Última sesión</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of zonas[1].datos"
+              (click)="zonas[1].selector(row.ip)"
+              [class.selected]="zonas[1].ipSeleccionada === row.ip">
+            <td><span class="ip-chip" [style.backgroundColor]="row.color"></span>{{ row.ip }}</td>
+            <td>{{ row.componente }}</td>
+            <td><span class="estado-badge" 
+                     [class.activo]="row.estadoServicio === 'Activo'"
+                     [class.degradado]="row.estadoServicio === 'Degradado'"
+                     [class.caido]="row.estadoServicio === 'Caído'">{{ row.estadoServicio }}</span></td>
+            <td>{{ row.usoCpu }}%</td>
+            <td>{{ row.usoRam }}%</td>
+            <td>{{ row.erroresHttp }}</td>
+            <td>{{ row.historial[row.historial.length - 1] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+</div>
 </div>
