@@ -6,7 +6,7 @@
 <app-modal-ayuda
   [visible]="modalAbierto"
   [titulo]="'¿Qué muestra este apartado?'"
-  [mensaje]="'Este panel muestra las bases de datos activas por zona, con su estado, ambiente, sesiones activas y KPIs.'"
+  [mensaje]="'Este panel muestra las bases de datos activas por zona, incluyendo su estado, motor, sesiones, bloqueos y consultas lentas.'"
   (cerrar)="cerrarModalAyuda()">
 </app-modal-ayuda>
 
@@ -22,16 +22,16 @@
           <strong>{{ basesTultitlan.length }}</strong>
         </div>
         <div class="kpi-card">
-          <div class="kpi-header"><i class="fas fa-check-circle"></i> OK</div>
-          <strong>{{ okTultitlan }}</strong>
+          <div class="kpi-header"><i class="fas fa-user-friends"></i> Sesiones Activas</div>
+          <strong>{{ totalSesiones(basesTultitlan) }}</strong>
         </div>
         <div class="kpi-card">
-          <div class="kpi-header"><i class="fas fa-exclamation-triangle"></i> Advertencias</div>
-          <strong>{{ advertenciasTultitlan }}</strong>
+          <div class="kpi-header"><i class="fas fa-lock"></i> Bloqueos</div>
+          <strong>{{ totalBloqueos(basesTultitlan) }}</strong>
         </div>
         <div class="kpi-card">
-          <div class="kpi-header"><i class="fas fa-times-circle"></i> Críticas</div>
-          <strong>{{ criticosTultitlan }}</strong>
+          <div class="kpi-header"><i class="fas fa-hourglass-half"></i> Consultas Lentas</div>
+          <strong>{{ totalConsultasLentas(basesTultitlan) }}</strong>
         </div>
       </div>
 
@@ -39,8 +39,13 @@
         <table class="tabla-ip">
           <thead>
             <tr>
-              <th>Nombre</th><th>IP</th><th>Estado</th>
-              <th>Ambiente</th><th>Monitoreo</th><th>Sesiones</th>
+              <th><i class="fas fa-database"></i> Nombre</th>
+              <th><i class="fas fa-network-wired"></i> IP</th>
+              <th><i class="fas fa-heartbeat"></i> Estado</th>
+              <th><i class="fas fa-cogs"></i> Motor</th>
+              <th><i class="fas fa-user-friends"></i> Sesiones</th>
+              <th><i class="fas fa-lock"></i> Bloqueos</th>
+              <th><i class="fas fa-hourglass-half"></i> Consultas Lentas</th>
             </tr>
           </thead>
           <tbody>
@@ -48,14 +53,14 @@
               <td>{{ bd.nombre }}</td>
               <td>{{ bd.ip_gestion }}</td>
               <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
-              <td>{{ bd.ambiente_val }}</td>
-              <td>{{ bd.en_monitoreo }}</td>
+              <td>{{ bd.version_val }}</td>
               <td>{{ bd.sesiones_activas }}</td>
+              <td>{{ bd.bloqueos }}</td>
+              <td>{{ bd.consultas_lentas }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
 
@@ -70,16 +75,16 @@
           <strong>{{ basesQueretaro.length }}</strong>
         </div>
         <div class="kpi-card">
-          <div class="kpi-header"><i class="fas fa-check-circle"></i> OK</div>
-          <strong>{{ okQueretaro }}</strong>
+          <div class="kpi-header"><i class="fas fa-user-friends"></i> Sesiones Activas</div>
+          <strong>{{ totalSesiones(basesQueretaro) }}</strong>
         </div>
         <div class="kpi-card">
-          <div class="kpi-header"><i class="fas fa-exclamation-triangle"></i> Advertencias</div>
-          <strong>{{ advertenciasQueretaro }}</strong>
+          <div class="kpi-header"><i class="fas fa-lock"></i> Bloqueos</div>
+          <strong>{{ totalBloqueos(basesQueretaro) }}</strong>
         </div>
         <div class="kpi-card">
-          <div class="kpi-header"><i class="fas fa-times-circle"></i> Críticas</div>
-        <strong>{{ criticosQueretaro }}</strong>
+          <div class="kpi-header"><i class="fas fa-hourglass-half"></i> Consultas Lentas</div>
+          <strong>{{ totalConsultasLentas(basesQueretaro) }}</strong>
         </div>
       </div>
 
@@ -87,8 +92,13 @@
         <table class="tabla-ip">
           <thead>
             <tr>
-              <th>Nombre</th><th>IP</th><th>Estado</th>
-              <th>Ambiente</th><th>Monitoreo</th><th>Sesiones</th>
+              <th><i class="fas fa-database"></i> Nombre</th>
+              <th><i class="fas fa-network-wired"></i> IP</th>
+              <th><i class="fas fa-heartbeat"></i> Estado</th>
+              <th><i class="fas fa-cogs"></i> Motor</th>
+              <th><i class="fas fa-user-friends"></i> Sesiones</th>
+              <th><i class="fas fa-lock"></i> Bloqueos</th>
+              <th><i class="fas fa-hourglass-half"></i> Consultas Lentas</th>
             </tr>
           </thead>
           <tbody>
@@ -96,9 +106,10 @@
               <td>{{ bd.nombre }}</td>
               <td>{{ bd.ip_gestion }}</td>
               <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
-              <td>{{ bd.ambiente_val }}</td>
-              <td>{{ bd.en_monitoreo }}</td>
+              <td>{{ bd.version_val }}</td>
               <td>{{ bd.sesiones_activas }}</td>
+              <td>{{ bd.bloqueos }}</td>
+              <td>{{ bd.consultas_lentas }}</td>
             </tr>
           </tbody>
         </table>

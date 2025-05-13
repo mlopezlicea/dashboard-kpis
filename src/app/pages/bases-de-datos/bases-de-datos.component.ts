@@ -27,38 +27,26 @@ export class BasesDeDatosComponent implements OnInit {
     });
   }
 
-  // Getters para KPIs de Tultitlán
+  // KPIs Tultitlán
   get totalTultitlan(): number {
     return this.basesTultitlan.length;
   }
 
-  get okTultitlan(): number {
-    return this.basesTultitlan.filter(b => b.estado_val === 'OK').length;
+  totalSesiones(bds: CatBd[]): number {
+    return bds.reduce((acc, bd) => acc + (bd.sesiones_activas || 0), 0);
   }
 
-  get advertenciasTultitlan(): number {
-    return this.basesTultitlan.filter(b => b.estado_val === 'ADVERTENCIA').length;
+  totalBloqueos(bds: CatBd[]): number {
+    return bds.reduce((acc, bd) => acc + (bd.bloqueos || 0), 0);
   }
 
-  get criticosTultitlan(): number {
-    return this.basesTultitlan.filter(b => b.estado_val === 'CRITICO').length;
+  totalConsultasLentas(bds: CatBd[]): number {
+    return bds.reduce((acc, bd) => acc + (bd.consultas_lentas || 0), 0);
   }
 
-  // Getters para KPIs de Querétaro
+  // KPIs Querétaro
   get totalQueretaro(): number {
     return this.basesQueretaro.length;
-  }
-
-  get okQueretaro(): number {
-    return this.basesQueretaro.filter(b => b.estado_val === 'OK').length;
-  }
-
-  get advertenciasQueretaro(): number {
-    return this.basesQueretaro.filter(b => b.estado_val === 'ADVERTENCIA').length;
-  }
-
-  get criticosQueretaro(): number {
-    return this.basesQueretaro.filter(b => b.estado_val === 'CRITICO').length;
   }
 
   abrirModalAyuda(): void {
