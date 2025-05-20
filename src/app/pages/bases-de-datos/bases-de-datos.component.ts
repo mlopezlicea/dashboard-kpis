@@ -15,17 +15,32 @@ export class BasesDeDatosComponent implements OnInit {
   constructor(private catBdService: CatBdService) {}
 
   ngOnInit(): void {
+    let pendientes = 2;
+
+    const finalizarCarga = () => {
+      pendientes--;
+      if (pendientes === 0) this.cargando = false;
+    };
+
     this.catBdService.getBySite('tultitlan').subscribe({
       next: (data) => this.basesTultitlan = data,
-      error: (err) => console.error('Error Tultitlán', err)
+      error: (err) => {
+        console.error('Error Tultitlán', err);
+        this.basesTultitlan = [];
+      },
+      complete: finalizarCarga
     });
 
     this.catBdService.getBySite('queretaro').subscribe({
       next: (data) => this.basesQueretaro = data,
-      error: (err) => console.error('Error Querétaro', err),
-      complete: () => this.cargando = false
+      error: (err) => {
+        console.error('Error Querétaro', err);
+        this.basesQueretaro = [];
+      },
+      complete: finalizarCarga
     });
   }
+
 
   // KPIs Tultitlán
   get totalTultitlan(): number {

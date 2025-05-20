@@ -10,9 +10,9 @@
   (cerrar)="cerrarModalAyuda()">
 </app-modal-ayuda>
 
-<div class="dashboard-doble-columna" *ngIf="!cargando">
+<div class="dashboard-doble-columna">
   <!-- ZONA TULTITLÁN -->
-  <div class="zona-column">
+<div class="zona-column" *ngIf="!cargando || basesTultitlan.length >= 0">
     <div class="zona-titulo">TULTITLÁN</div>
     <div class="zona-panel">
 
@@ -48,24 +48,28 @@
               <th><i class="fas fa-hourglass-half"></i> Consultas Lentas</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let bd of basesTultitlan">
-              <td>{{ bd.nombre }}</td>
-              <td>{{ bd.ip_gestion }}</td>
-              <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
-              <td>{{ bd.version_val }}</td>
-              <td>{{ bd.sesiones_activas }}</td>
-              <td>{{ bd.bloqueos }}</td>
-              <td>{{ bd.consultas_lentas }}</td>
-            </tr>
-          </tbody>
+            <tbody>
+              <tr *ngIf="basesTultitlan.length === 0">
+                <td colspan="7" class="tabla-vacia">No hay datos disponibles</td>
+              </tr>
+              <tr *ngFor="let bd of basesTultitlan">
+                <td>{{ bd.nombre }}</td>
+                <td>{{ bd.ip_gestion }}</td>
+                <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
+                <td>{{ bd.version_val }}</td>
+                <td>{{ bd.sesiones_activas }}</td>
+                <td>{{ bd.bloqueos }}</td>
+                <td>{{ bd.consultas_lentas }}</td>
+              </tr>
+            </tbody>
+
         </table>
       </div>
     </div>
   </div>
 
   <!-- ZONA QUERÉTARO -->
-  <div class="zona-column">
+<div class="zona-column" *ngIf="!cargando || basesQueretaro.length >= 0">
     <div class="zona-titulo">QUERÉTARO</div>
     <div class="zona-panel">
 
@@ -101,17 +105,20 @@
               <th><i class="fas fa-hourglass-half"></i> Consultas Lentas</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let bd of basesQueretaro">
-              <td>{{ bd.nombre }}</td>
-              <td>{{ bd.ip_gestion }}</td>
-              <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
-              <td>{{ bd.version_val }}</td>
-              <td>{{ bd.sesiones_activas }}</td>
-              <td>{{ bd.bloqueos }}</td>
-              <td>{{ bd.consultas_lentas }}</td>
-            </tr>
-          </tbody>
+              <tbody>
+                <tr *ngIf="basesQueretaro.length === 0">
+                  <td colspan="7" class="tabla-vacia">No hay datos disponibles</td>
+                </tr>
+                <tr *ngFor="let bd of basesQueretaro">
+                  <td>{{ bd.nombre }}</td>
+                  <td>{{ bd.ip_gestion }}</td>
+                  <td><span [ngClass]="getClaseEstado(bd.estado_val)">{{ bd.estado_val }}</span></td>
+                  <td>{{ bd.version_val }}</td>
+                  <td>{{ bd.sesiones_activas }}</td>
+                  <td>{{ bd.bloqueos }}</td>
+                  <td>{{ bd.consultas_lentas }}</td>
+                </tr>
+              </tbody>
         </table>
       </div>
 
